@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker node rm -f $1
