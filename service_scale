@@ -1,3 +1,4 @@
 #!/bin/bash
+# usage ./service_scale name_service 12
 
 docker service scale $1=$2

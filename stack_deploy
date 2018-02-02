@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# usage: ./stack_deploy file.yml name_stack
+docker stack deploy --compose-file $1 $2

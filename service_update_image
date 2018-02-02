@@ -1,0 +1,4 @@
+#!/bin/bash
+# usage ./service_update_image name_service image_docker
+
+docker service update --image $2 $1

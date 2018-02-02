@@ -1,0 +1,4 @@
+#!/bin/bash
+# usage ./stack_rm stack_name
+
+docker stack rm $1

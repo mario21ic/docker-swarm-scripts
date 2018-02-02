@@ -1,0 +1,4 @@
+#!/bin/bash
+# usage ./stack_service stack_name
+
+docker stack services $1
