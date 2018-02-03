@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+for i in 1 2 3 4 5; do
+    docker-machine rm -f swarm-$i
+done
+
+echo ">> The swarm cluster is deleted"
