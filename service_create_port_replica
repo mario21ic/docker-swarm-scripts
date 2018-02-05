@@ -1,0 +1,4 @@
+#!/bin/bash
+# Usage: ./service_create_replica_port nginx 80 20
+
+docker service create --publish $2:$2 --replicas $3 $1
