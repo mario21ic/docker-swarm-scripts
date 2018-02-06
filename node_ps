@@ -1,3 +1,4 @@
 #!/bin/bash
+# Usage ./node_ps nodeid
 
-docker node ps
+docker node ps $1
