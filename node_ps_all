@@ -1,0 +1,3 @@
+#!/bin/bash
+
+docker node ps $(docker node ls -q)
