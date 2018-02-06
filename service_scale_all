@@ -1,0 +1,4 @@
+#!/bin/bash
+
+NRO=$1
+docker service ls --format "{{.Name}}"|awk -v nro=$NRO '{print "docker service scale "$1"="nro}'|bash
