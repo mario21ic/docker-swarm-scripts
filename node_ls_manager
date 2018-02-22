@@ -1,4 +1,4 @@
 #!/bin/bash
 
-docker node ls --filter name=manager
+docker node ls --filter "role=manager"
 

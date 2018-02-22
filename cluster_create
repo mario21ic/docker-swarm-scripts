@@ -1,50 +1,9 @@
 #!/usr/bin/env bash
 
-for i in 1 2 3 4 5; do
-    docker-machine create \
-        -d virtualbox \
-        swarm-$i
+for i in 1 2 3; do
+  docker-machine create \
+    -d virtualbox \
+    swarm-$i
 done
-
-echo "Manager"
-# manager 1
-eval $(docker-machine env swarm-1)
-docker swarm init \
-  --advertise-addr $(docker-machine ip swarm-1)
-
-# manager 2
-TOKEN=$(docker swarm join-token -q manager)
-eval $(docker-machine env swarm-2)
-docker swarm join \
-    --token $TOKEN \
-    --advertise-addr $(docker-machine ip swarm-2) \
-    $(docker-machine ip swarm-1):2377
-#for i in 1 2; do
-#    eval $(docker-machine env swarm-$i)
-#    docker node update \
-#        --label-add env=prod \
-#        --label-add type=manager \
-#        swarm-$i
-#done
-
-# worker
-echo "Worker"
-TOKEN=$(docker swarm join-token -q worker)
-for i in 3 4 5; do
-    eval $(docker-machine env swarm-$i)
-
-    docker swarm join \
-        --token $TOKEN \
-        --advertise-addr $(docker-machine ip swarm-$i) \
-        $(docker-machine ip swarm-1):2377
-done
-
-#for i in 3 4 5; do
-#    eval $(docker-machine env swarm-$i)
-#    docker node update \
-#        --label-add env=prod \
-#        --label-add type=worker \
-#        swarm-$i
-#done
 
 echo ">> The swarm cluster is up and running"

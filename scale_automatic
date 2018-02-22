@@ -1,0 +1,11 @@
+#!/bin/bash
+
+services=$(docker service ls --format '{{.ID}}')
+for service in $services; do
+  tasks=$(docker service ps $service --format '{{.ID}}')
+  for task in $tasks; do
+    if docker inspect $task --format '{{.Status}}' | grep 'insufficient resources' 1>/dev/null; then
+      scale-up-cmd
+    fi
+  done
+done

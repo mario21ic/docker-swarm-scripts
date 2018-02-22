@@ -1,3 +1,11 @@
 #!/bin/bash
 
 docker node update --availability drain $1
+
+
+ec2_instance=$(aws ec2 describe-instances --filters Name=private-ip-address,Values=10.0.3.111 --query "Reservations[].Instances[].PrivateIpAddress")
+
+aws ec2 terminate-instances --instance-ids $ec2_instance
+
+docker node ls -q | xargs docker node inspect \
+    -f '{{ .ID }} [{{ .Description.Hostname }}]: {{ range $k, $v := .Spec.Labels }}{{ $k }}={{ $v }} {{end}}'
